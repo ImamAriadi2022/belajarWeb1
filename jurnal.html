@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jurnal - Web Scopus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.querySelector("input[type='search']");
+        const cards = document.querySelectorAll(".card");
+        const noResultsMessage = document.getElementById("noResultsMessage");
+    
+        searchInput.addEventListener("input", function () {
+          const query = searchInput.value.toLowerCase();
+          let hasResults = false;
+    
+          cards.forEach((card) => {
+            const title = card.querySelector(".card-title").textContent.toLowerCase();
+            const author = card.querySelector(".card-text").textContent.toLowerCase();
+            const abstract = card.querySelector(".card-text:nth-of-type(2)").textContent.toLowerCase();
+    
+            if (title.includes(query) || author.includes(query) || abstract.includes(query)) {
+              card.parentElement.style.display = "block"; // Show card
+              hasResults = true;
+            } else {
+              card.parentElement.style.display = "none"; // Hide card
+            }
+          });
+    
+          // Show or hide the "no results" message
+          noResultsMessage.style.display = hasResults ? "none" : "block";
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Web Scopus
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Jurnal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Search Section -->
+    <div class="container my-5">
+      <h1 class="text-center mb-4">Cari Jurnal</h1>
+      <form class="d-flex justify-content-center">
+        <input class="form-control w-50 me-2" type="search" placeholder="Cari jurnal berdasarkan judul, penulis, atau kata kunci" aria-label="Search">
+        <button class="btn btn-success" type="submit">Cari</button>
+      </form>
+    </div>
+    <!-- Search Section -->
+
+    <!-- Jurnal Cards -->
+    <div class="container my-3">
+    <p id="noResultsMessage" class="text-danger text-center" style="display: none;">Jurnal tidak ditemukan</p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="img/jurnal1.png" class="card-img-top" alt="Jurnal 1">
+            <div class="card-body">
+              <h5 class="card-title">Judul Jurnal 1</h5>
+              <p class="card-text">Penulis: John Doe</p>
+              <p class="card-text">Abstrak: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal1">Selengkapnya</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="img/jurnal2.png" class="card-img-top" alt="Jurnal 2">
+            <div class="card-body">
+              <h5 class="card-title">Judul Jurnal 2</h5>
+              <p class="card-text">Penulis: Jane Smith</p>
+              <p class="card-text">Abstrak: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal2">Selengkapnya</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="img/jurnal3.png" class="card-img-top" alt="Jurnal 3">
+            <div class="card-body">
+              <h5 class="card-title">Judul Jurnal 3</h5>
+              <p class="card-text">Penulis: Alice Johnson</p>
+              <p class="card-text">Abstrak: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal3">Selengkapnya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jurnal Cards -->
+
+    <!-- Detail Modals -->
+    <!-- Modal 1 -->
+    <div class="modal fade" id="detailModal1" tabindex="-1" aria-labelledby="detailModal1Label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailModal1Label">Judul Jurnal 1</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Penulis:</strong> John Doe</p>
+            <p><strong>Abstrak:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            <p><strong>Publikasi:</strong> 2025</p>
+            <p><strong>DOI:</strong> 10.1234/example.doi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal 2 -->
+    <div class="modal fade" id="detailModal2" tabindex="-1" aria-labelledby="detailModal2Label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailModal2Label">Judul Jurnal 2</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Penulis:</strong> Jane Smith</p>
+            <p><strong>Abstrak:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p><strong>Publikasi:</strong> 2024</p>
+            <p><strong>DOI:</strong> 10.5678/example.doi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal 3 -->
+    <div class="modal fade" id="detailModal3" tabindex="-1" aria-labelledby="detailModal3Label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailModal3Label">Judul Jurnal 3</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Penulis:</strong> Alice Johnson</p>
+            <p><strong>Abstrak:</strong> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <p><strong>Publikasi:</strong> 2023</p>
+            <p><strong>DOI:</strong> 10.9101/example.doi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Detail Modals -->
+
+    <!-- disini buat fitur lainnya -->
+
+
+
+
+
+    <!-- disini buat fitur lainnya -->
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start">
+      <div class="text-center p-3">
+        © 2025 Web Scopus
+        <a class="text-dark" href="#">Privacy Policy</a>
+      </div>
+    </footer>
+    <!-- Footer -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>
